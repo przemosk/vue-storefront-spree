@@ -1,5 +1,6 @@
 import { apiClientFactory, ApiClientExtension } from '@vue-storefront/core';
 import { makeClient } from '@spree/storefront-api-v2-sdk';
+import NodeCache from 'node-cache';
 import getProduct from './api/getProduct';
 import getProducts from './api/getProducts';
 import getCategory from './api/getCategory';
@@ -32,13 +33,16 @@ const defaultSettings = {
   backendUrl: 'http://localhost:4000'
 };
 
+const cacheProvider = new NodeCache({});
+
 const onCreate = (settings) => {
   return {
     config: {
       ...defaultSettings,
       ...settings
     },
-    client: makeClient({ host: settings.backendUrl || defaultSettings.backendUrl })
+    client: makeClient({ host: settings.backendUrl || defaultSettings.backendUrl }),
+    cacheProvider
   };
 };
 

@@ -1,5 +1,6 @@
 import { Client } from '@spree/storefront-api-v2-sdk';
 import { IOAuthToken } from '@spree/storefront-api-v2-sdk/types/interfaces/Token';
+import NodeCache from 'node-cache';
 
 export * from './cart';
 export * from './product';
@@ -45,6 +46,7 @@ export type ApiConfig = {
 export type ApiContext = {
   client: Client;
   config: ApiConfig;
+  cacheProvider?: NodeCache;
 }
 
 export type GetProductParams = {
